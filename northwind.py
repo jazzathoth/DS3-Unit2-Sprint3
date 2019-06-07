@@ -10,7 +10,9 @@ def get2_nwinfo():
 
     curs.execute("SELECT ProductName, UnitPrice FROM Product ORDER BY UnitPrice DESC LIMIT 10 ;")
     print("10 most expensive Products: ")
-    print(curs.fetchall())
+    expensive = curs.fetchall()
+    for item in expensive:
+        print(item)
 
     emp_dates = curs.execute("SELECT (HireDate - BirthDate) FROM Employee ;").fetchall()
     
@@ -19,7 +21,8 @@ def get2_nwinfo():
     for emp in emp_dates:
         ages.append(emp[0])
 
-    print("Mean Hire Age: ", (sum(ages)/len(ages)))
+    print("\nMean Hire Age: ", (sum(ages)/len(ages)))
+    pass
 
 def get3_nwinfo():
     conn = sqlite3.connect('northwind_small.sqlite3')
@@ -33,10 +36,17 @@ def get3_nwinfo():
     
     
     print('10 most expensive with Supplier Name: ')
-    print(curs.fetchall())
+
+    expensive = curs.fetchall()
+    
+    # Making the output look nicer 
+    for item in expensive:
+        print(item)
 
     curs.execute('SELECT Category.CategoryName, COUNT(CategoryID) FROM Product LEFT JOIN Category on Product.CategoryID = Category.Id GROUP BY CategoryID;')
-    print('Number of Products in each Category:')
-    print(curs.fetchall())
+    print('\nNumber of Products in each Category:')
 
+    categories_count = curs.fetchall()
+    for c in categories_count:
+        print(c)
     pass
