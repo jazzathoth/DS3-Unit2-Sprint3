@@ -22,6 +22,14 @@ def get2_nwinfo():
         ages.append(emp[0])
 
     print("\nMean Hire Age: ", (sum(ages)/len(ages)))
+
+    curs.execute('SELECT AVG(HireDate - BirthDate), City FROM Employee GROUP BY City;')
+    mha_city = curs.fetchall()
+
+    print('\nMean Hire Age by City: ')
+    for age in mha_city:
+        print(age)
+
     pass
 
 def get3_nwinfo():
